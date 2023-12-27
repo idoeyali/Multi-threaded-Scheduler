@@ -8,9 +8,12 @@ void Scheduler::update_deque()
     _ready_threads.pop_front();
     _running_thread->set_state(RUNNING);
 }
-
+int xgdbnhgjhkhgfghcvj = 1
 void Scheduler::jump_to_threads_helper(bool sleep, bool block, bool terminate)
 {
+    /**
+     * dfvgmjfkvbnd
+     */
     if (_ready_threads.empty() && _running_thread->get_tid()!=0 && terminate)
     {
         _running_thread = _all_tid[MAIN_THREAD_ID];
