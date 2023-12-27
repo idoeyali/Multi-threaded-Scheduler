@@ -40,8 +40,10 @@ address_t translate_address(address_t addr)
 }
 #endif
 Thread::Thread()
-
 {
+/**
+ * Default Constructor
+ */
     _tid = MAIN_THREAD_ID;
     _state = RUNNING;
     _stack = new char[STACK_SIZE];
@@ -49,8 +51,12 @@ Thread::Thread()
     _quantum = MAIN_QUANTUMS_VALUE;
     sigemptyset(&_envp->__saved_mask);
 }
+
 Thread::Thread(int tid, thread_entry_point entry_point)
 {
+/**
+* Constructor
+*/
     _tid = tid;
     _entry_point = entry_point;
     _quantum = INITIAL_QUANTUMS_VALUE;
@@ -66,5 +72,8 @@ Thread::Thread(int tid, thread_entry_point entry_point)
 
 Thread::~Thread()
 {
+    /**
+     * Distructor
+     */
     delete[] _stack;
 }

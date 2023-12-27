@@ -8,13 +8,10 @@ void Scheduler::update_deque()
     _ready_threads.pop_front();
     _running_thread->set_state(RUNNING);
 }
-int xgdbnhgjhkhgfghcvj = 1
+
 void Scheduler::jump_to_threads_helper(bool sleep, bool block, bool terminate)
 {
-    /**
-     * dfvgmjfkvbnd
-     */
-    if (_ready_threads.empty() && _running_thread->get_tid()!=0 && terminate)
+    if (_ready_threads.empty() && _running_thread->get_tid() != 0 && terminate)
     {
         _running_thread = _all_tid[MAIN_THREAD_ID];
         _running_thread->increment_quantum();
@@ -30,7 +27,7 @@ void Scheduler::jump_to_threads_helper(bool sleep, bool block, bool terminate)
         _running_thread->set_state(READY);
         _ready_threads.push_back(_running_thread);
     }
-    if(block)
+    if (block)
     {
         sp_thread running_thread = get_running_thread();
         running_thread->set_state(BLOCKED);
@@ -63,7 +60,8 @@ int Scheduler::terminate_thread(int tid)
     if (cur_thread->get_state() == BLOCKED)
     {
         _blocked_threads.erase(tid);
-    } else if (cur_thread->get_state() == READY && _sleeping_threads.count(tid) == 0)
+    } else if (cur_thread->get_state() == READY &&
+               _sleeping_threads.count(tid) == 0)
     {
         auto to_erase = std::find(_ready_threads.begin(),
                                   _ready_threads.end(), cur_thread);
@@ -122,7 +120,7 @@ void Scheduler::sleeping_threads_update()
         if (cur_thread->second == END_TO_SLEEP)
         {
             auto &temp = _all_tid[cur_thread->first];
-            if(temp->get_state() !=BLOCKED)
+            if (temp->get_state() != BLOCKED)
             {
                 temp->set_state(READY);
                 _ready_threads.push_back(temp);
