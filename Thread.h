@@ -1,7 +1,4 @@
-//
-// Created by user on 19/04/2023.
-//
-//
+
 #ifndef RESOURCES_THREAD_H
 #define RESOURCES_THREAD_H
 

@@ -1,6 +1,3 @@
-//
-// Created by user on 20/04/2023.
-//
 #include "uthreads.h"
 #include "Scheduler.h"
 #include <csignal>
@@ -77,11 +74,13 @@ int uthread_init(int quantum_usecs)
     }
     scheduler = std::make_shared<Scheduler>(quantum_usecs);
     sa.sa_handler = &timer_handler;
+    // Set up a signal handler for the SIGVTALRM signal
     if (sigaction(SIGVTALRM, &sa, nullptr) < 0)
     {
         fprintf(stderr, "system error: " SIGACTION_ERROR "\n");
         return FAILURE;
     }
+    // Ensuring that timer interrupts don't interfere with critical operations
     if (sigaddset(&blocked_signal, SIGVTALRM) < 0)
     {
         fprintf(stderr, "system error: " SIGADDSET_ERROR "\n");
